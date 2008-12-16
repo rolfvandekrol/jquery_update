@@ -25,25 +25,6 @@ function jquery_update_requirements($phase) {
 }
 
 /**
- * Implementation of hook_install().
- */
-function jquery_update_install() {
-  // Set the module's weight high so that it runs after other modules.
-  db_query("UPDATE {system} SET weight = 99 WHERE name = 'jquery_update' and type = 'module'");
-}
-
-/**
- * Set module's weight high so that it runs after other modules.
- */
-function jquery_update_update_6100() {
-  $ret = array();
-
-  $ret[] = update_sql("UPDATE {system} SET weight = 99 WHERE name = 'jquery_update' and type = 'module'");
-
-  return $ret;
-}
-
-/**
  * Implementation of hook_uninstall().
  */
 function jquery_update_uninstall() {

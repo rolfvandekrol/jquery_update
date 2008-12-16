@@ -2,4 +2,6 @@
 name = jQuery Update
 description = Updates Drupal to use the latest version of jQuery.
 package = User interface
-core = 6.x
+core = 7.x
+files[] = jquery_update.module
+files[] = jquery_update.install

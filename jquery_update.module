@@ -12,73 +12,6 @@
 define('JQUERY_UPDATE_REPLACE_PATH', drupal_get_path('module', 'jquery_update') . '/replace');
 
 /**
- * Array of jQuery files to replace if jQuery is loaded.
- */
-function jquery_update_get_replacements() {
-  return array(
-    'module' => array(
-      'misc/farbtastic/farbtastic.js' => 'farbtastic.js',
-    ),
-  );
-}
-
-/**
- * Implementation of hook_theme_registry_alter().
- *
- * Make jQuery Update's page preprocess function run *after* everything else's,
- * so that a theme can't call drupal_get_js() and mess everything up.
- */
-function jquery_update_theme_registry_alter(&$theme_registry) {
-  if (isset($theme_registry['page'])) {
-    // If jquery_update's preprocess function is there already, remove it.
-    if ($key = array_search('jquery_update_preprocess_page', $theme_registry['page']['preprocess functions'])) {
-      unset($theme_registry['page']['preprocess functions'][$key]);
-    }
-    // Now tack it on at the end so it runs after everything else.
-    $theme_registry['page']['preprocess functions'][] = 'jquery_update_preprocess_page';
-  } 
-}
-
-/**
- * Implementation of moduleName_preprocess_hook().
- *
- * Replace Drupal core's jquery.js with the new one from jQuery Update module.
- */
-function jquery_update_preprocess_page(&$variables) {
-  // Only do this for pages that have JavaScript on them.
-  if (!empty($variables['scripts'])) {
-  
-    // Perform the logic if either jQuery Update's jquery.js is newer than
-    // core's, or if we're using a different compression type.
-    if (variable_get('jquery_update_replace', TRUE) ||
-        variable_get('jquery_update_compression_type', 'pack') != 'pack') {
-      // Get an array of all the JavaScript files loaded by Drupal on this page.
-      $scripts = drupal_add_js();
-
-      // Replace jquery.js first.
-      $new_jquery = array(jquery_update_jquery_path() => $scripts['core']['misc/jquery.js']);
-      $scripts['core'] = array_merge($new_jquery, $scripts['core']);
-      unset($scripts['core']['misc/jquery.js']);
-
-      // Loop through each of the required replacements.
-      foreach (jquery_update_get_replacements() as $type => $replacements) {
-        foreach ($replacements as $find => $replace) {
-          // If the file to replace is loaded on this page...
-          if (isset($scripts[$type][$find])) {
-            // Create a new entry for the replacement file, and unset the original one.
-            $replace = JQUERY_UPDATE_REPLACE_PATH . '/' . $replace;
-            $scripts[$type][$replace] = $scripts[$type][$find];
-            unset($scripts[$type][$find]);
-          }
-        }
-      } 
-
-      $variables['scripts'] = drupal_get_js('header', $scripts);
-    }
-  }
-}
-
-/**
  * Return the version of jQuery that is installed.
  *
  * This can be used by other modules' hook_requirements() to ensure that the
@@ -102,6 +35,16 @@ function jquery_update_get_version($jquery_path = NULL) {
   }
 
   return $version;
+}
+
+/**
+ * Implementation of hook_js_alter().
+ */
+function jquery_update_js_alter(&$javascript) {
+  // Only replace jquery.js if the version in jQuery Update is newer or providing a different form of compression.
+  if (variable_get('jquery_update_replace', TRUE) || variable_get('jquery_update_compression_type', 'pack') != 'pack') {
+    $javascript['misc/jquery.js']['data'] = jquery_update_jquery_path();
+  }
 }
 
 /**

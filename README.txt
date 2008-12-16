@@ -34,5 +34,5 @@ INSTALLATION
 
 2. Enable the module at Administer >> Site building >> Modules.
 
-3. That's it. :) Thanks to the new theme system in Drupal 6.x+, you no longer
-   need to copy files around. Hooray!
+3. That's it. :) Thanks to the new JavaScript system in Drupal 7.x+, you no longer
+   need to mess with your theme. Hooray!
