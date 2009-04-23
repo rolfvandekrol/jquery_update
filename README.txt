@@ -11,6 +11,7 @@ INTRODUCTION
 ------------
 
 Authors:
+* Matt Farina (mfer)
 * Jeff Robbins (jjeff)
 * Angela Byron (webchick)
 * Addison Berry (add1sun)
@@ -33,6 +34,3 @@ INSTALLATION
 1. Copy the jquery_update directory to your sites/SITENAME/modules directory.
 
 2. Enable the module at Administer >> Site building >> Modules.
-
-3. That's it. :) Thanks to the new JavaScript system in Drupal 7.x+, you no longer
-   need to mess with your theme. Hooray!
