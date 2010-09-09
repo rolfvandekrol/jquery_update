@@ -1,6 +1,6 @@
 ; $Id$
 name = jQuery Update
-description = Updates Drupal to use the latest version of jQuery.
+description = Updates jQuery to jQuery 1.4.2 and jQuery UI 1.8.4.
 package = User interface
 core = 7.x
 files[] = jquery_update.module

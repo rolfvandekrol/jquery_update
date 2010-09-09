@@ -11,13 +11,15 @@
  */
 function jquery_update_requirements($phase) {
   $requirements = array();
-  $t = get_t();
 
   if ($phase == 'runtime') {
+    $t = get_t();
+    $jquery = drupal_get_library('system', 'jquery');
+    $ui = drupal_get_library('system', 'ui');
     $requirements['jquery_update'] = array(
       'title' => $t('jQuery Update'),
       'severity' => REQUIREMENT_OK,
-      'value' => jquery_update_get_version(),
+      'value' => t('jQuery %jquery and jQuery UI %ui', array('%jquery' => $jquery['version'], '%ui' => $ui['version'])),
     );
   }
 
@@ -28,7 +30,6 @@ function jquery_update_requirements($phase) {
  * Implementation of hook_uninstall().
  */
 function jquery_update_uninstall() {
-  variable_del('jquery_update_replace');
   variable_del('jquery_update_compression_type');
 }
 
@@ -40,4 +41,5 @@ function jquery_update_update_7000() {
   if (variable_get('jquery_update_compression_type', 'min') == 'pack') {
     variable_set('jquery_update_compression_type', 'min');
   }
+  variable_del('jquery_update_replace');
 }

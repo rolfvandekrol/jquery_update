@@ -5,18 +5,11 @@ CONTENTS OF THIS FILE
 
  * Introduction
  * Installation
+ * Credits
 
 
 INTRODUCTION
 ------------
-
-Authors:
-* Matt Farina (mfer)
-* Jeff Robbins (jjeff)
-* Angela Byron (webchick)
-* Addison Berry (add1sun)
-
-This Module Made by Robots: http://www.lullabot.com
 
 jQuery Update module upgrades Drupal's stable version of jQuery in order to
 support the most current jQuery version available.
@@ -34,3 +27,12 @@ INSTALLATION
 1. Copy the jquery_update directory to your sites/SITENAME/modules directory.
 
 2. Enable the module at Administer >> Site building >> Modules.
+
+
+CREDITS
+-------
+* Matt Farina (mfer)
+* Jeff Robbins (jjeff)
+* Angela Byron (webchick)
+* Addison Berry (add1sun)
+* Rob Loach

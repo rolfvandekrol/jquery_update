@@ -2,5 +2,6 @@
 
 jQuery Update 7.x-1.x, xxxx-xx-xx
 ---------------------------------
-#771062 by quiptime: Fixed module administration path.
-Initial Release for Drupal 7, ships with jQuery 1.3.2
+#701496 by Rob Loach: Moved to hook_library_alter()
+#771062 by quiptime: Fixed module administration path
+Initial Release for Drupal 7, ships with jQuery 1.4.2
