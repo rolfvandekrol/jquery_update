@@ -64,7 +64,7 @@ function jquery_update_flush_caches() {
  * Implementation of hook_menu().
  */
 function jquery_update_menu() {
-  $items['admin/settings/jquery_update'] = array(
+  $items['admin/config/user-interface/jquery_update'] = array(
     'title' => 'jQuery Update',
     'description' => 'Configure settings for jQuery Update module.',
     'page callback' => 'drupal_get_form',

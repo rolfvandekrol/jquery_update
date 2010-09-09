@@ -2,5 +2,5 @@
 
 jQuery Update 7.x-1.x, xxxx-xx-xx
 ---------------------------------
-- Initial Release for Drupal 7.
-- Ships with jQuery 1.3.2
+#771062 by quiptime: Fixed module administration path.
+Initial Release for Drupal 7, ships with jQuery 1.3.2
