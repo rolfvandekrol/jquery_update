@@ -11,22 +11,23 @@
  */
 function jquery_update_library() {
   // Register libraries available in the external directory.
+  $path = drupal_get_path('module', 'jquery_update') . '/ui/external';
   $libraries['qunit'] = array(
     'title' => 'QUnit',
     'js' => array(
-      drupal_get_path('module', 'jquery_update') . '/ui/external/qunit.js' => array(
+      $path . '/qunit.js' => array(
         'group' => JS_LIBRARY,
         'weight' => 2,
       ),
     ),
     'css' => array(
-      drupal_get_path('module', 'jquery_update') . '/ui/external/qunit.css' => array(),
+      $path . '/qunit.css' => array(),
     ),
   );
   $libraries['jquery.metadata'] = array(
     'title' => 'QUnit',
     'js' => array(
-      drupal_get_path('module', 'jquery_update') . '/ui/external/jquery.metadata.js' => array(
+      $path . '/jquery.metadata.js' => array(
         'group' => JS_LIBRARY,
         'weight' => 2,
       ),
@@ -37,13 +38,14 @@ function jquery_update_library() {
     'title' => 'bgiframe',
     'website' => 'http://docs.jquery.com/Plugins/bgiframe',
     'js' => array(
-      drupal_get_path('module', 'jquery_update') . '/ui/external/jquery.bgiframe.js' => array(
+      $path . '/jquery.bgiframe.js' => array(
         'group' => JS_LIBRARY,
         'weight' => 2,
       ),
     ),
     'version' => '2.1.2',
   );
+  return $libraries;
 }
 
 /**
