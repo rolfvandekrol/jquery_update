@@ -1,7 +1,9 @@
 ; $Id$
 name = jQuery Update
-description = Updates jQuery to jQuery 1.4.2 and jQuery UI 1.8.4.
+description = Updates jQuery to jQuery 1.5 and jQuery UI 1.8.9.
 package = User interface
 core = 7.x
 files[] = jquery_update.module
 files[] = jquery_update.install
+
+configure = admin/config/development/performance

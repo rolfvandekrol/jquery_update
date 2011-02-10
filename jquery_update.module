@@ -7,6 +7,46 @@
  */
 
 /**
+ * Implements hook_library().
+ */
+function jquery_update_library() {
+  // Register libraries available in the external directory.
+  $libraries['qunit'] = array(
+    'title' => 'QUnit',
+    'js' => array(
+      drupal_get_path('module', 'jquery_update') . '/ui/external/qunit.js' => array(
+        'group' => JS_LIBRARY,
+        'weight' => 2,
+      ),
+    ),
+    'css' => array(
+      drupal_get_path('module', 'jquery_update') . '/ui/external/qunit.css' => array(),
+    ),
+  );
+  $libraries['jquery.metadata'] = array(
+    'title' => 'QUnit',
+    'js' => array(
+      drupal_get_path('module', 'jquery_update') . '/ui/external/jquery.metadata.js' => array(
+        'group' => JS_LIBRARY,
+        'weight' => 2,
+      ),
+    ),
+    'version' => '4187',
+  );
+  $libraries['jquery.bgiframe'] = array(
+    'title' => 'bgiframe',
+    'website' => 'http://docs.jquery.com/Plugins/bgiframe',
+    'js' => array(
+      drupal_get_path('module', 'jquery_update') . '/ui/external/jquery.bgiframe.js' => array(
+        'group' => JS_LIBRARY,
+        'weight' => 2,
+      ),
+    ),
+    'version' => '2.1.2',
+  );
+}
+
+/**
  * Implementation of hook_js_alter().
  */
 function jquery_update_library_alter(&$javascript) {
@@ -17,7 +57,7 @@ function jquery_update_library_alter(&$javascript) {
 
   // Replace jQuery.
   $javascript['jquery']['js']['misc/jquery.js']['data'] = $path . '/replace/jquery/jquery' . $min . '.js';
-  $javascript['jquery']['version'] = '1.4.2';
+  $javascript['jquery']['version'] = '1.5';
 
   // Replace jQuery UI's JavaScript, beginning by defining the mapping.
   $names = drupal_map_assoc(array(
@@ -27,19 +67,32 @@ function jquery_update_library_alter(&$javascript) {
     'ui.sortable', 'ui.tabs', 'ui.widget', 'effects.blind', 'effects.bounce',
     'effects.clip', 'effects.drop', 'effects.explode', 'effects.fade',
     'effects.fold', 'effects.highlight', 'effects.pulsate', 'effects.scale',
-    'effects.slide', 'effects.transfer',
+    'effects.shake', 'effects.slide', 'effects.transfer',
   ));
   $names['ui'] = 'ui.core';
   $names['effects'] = 'effects.core';
 
-  // Construct the jQuery UI path.
+  // Construct the jQuery UI path and replace the JavaScript.
   $jspath = $path . '/replace/ui/ui/' . (variable_get('jquery_update_compression_type', 'min') == 'min' ? 'minified/' : '');
   foreach ($names as $name => $file) {
     $corefile = 'misc/ui/jquery.' . $file . '.min.js';
     $javascript[$name]['js'][$corefile]['data'] = $jspath . 'jquery.' . $file . $min . '.js';
-    $javascript[$name]['version'] = '1.8.4';
+    $javascript[$name]['version'] = '1.8.9';
   }
-  // TODO: Replace all of jQuery UI's CSS.
+
+  // Replace all CSS files.
+  $names = drupal_map_assoc(array(
+    'ui.accordion', 'ui.autocomplete', 'ui.button', 'ui.datepicker',
+    'ui.dialog', 'ui.progressbar', 'ui.resizable', 'ui.selectable',
+    'ui.slider', 'ui.tabs',
+  ));
+  $names['ui'] = 'ui.core';
+  $csspath = $path . '/replace/ui/themes/base/' . (variable_get('jquery_update_compression_type', 'min') == 'min' ? 'minified/' : '');
+  foreach ($names as $name => $file) {
+    $javascript[$name]['css']["misc/ui/jquery.$file.css"]['data'] = $csspath . 'jquery.' . $file . $min . '.css';
+  }
+  // Make sure ui.theme is replaced as well.
+  $javascript['ui']['css']['misc/ui/jquery.ui.theme.css']['data'] = $csspath . 'jquery.ui.theme' . $min . '.css';
 
   // Replace the jQuery Cookie plugin.
   $javascript['cookie']['js']['misc/jquery.cookie.js']['data'] = $path . '/replace/ui/external/jquery.cookie.js';
