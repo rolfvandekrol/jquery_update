@@ -98,6 +98,10 @@ function jquery_update_library_alter(&$javascript) {
   // Replace the jQuery Cookie plugin.
   $javascript['cookie']['js']['misc/jquery.cookie.js']['data'] = $path . '/replace/ui/external/jquery.cookie.js';
   $javascript['cookie']['version'] = '1.0';
+
+  // Replace jQuery Form plugin.
+  $javascript['jquery.form']['js']['misc/jquery.form.js']['data'] = $path . '/replace/misc/jquery.form.js';
+  $javascript['jquery.form']['version'] = '2.67';
 }
 
 /**
