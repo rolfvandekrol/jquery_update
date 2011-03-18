@@ -1,3 +1,4 @@
+Note: This file is out of date.
 
 jQuery Update 7.x-1.0, 2010-02-11
 ---------------------------------
