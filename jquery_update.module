@@ -58,7 +58,7 @@ function jquery_update_library_alter(&$javascript) {
 
   // Replace jQuery.
   $javascript['jquery']['js']['misc/jquery.js']['data'] = $path . '/replace/jquery/jquery' . $min . '.js';
-  $javascript['jquery']['version'] = '1.5';
+  $javascript['jquery']['version'] = '1.5.1';
 
   // Replace jQuery UI's JavaScript, beginning by defining the mapping.
   $names = drupal_map_assoc(array(
@@ -78,7 +78,7 @@ function jquery_update_library_alter(&$javascript) {
   foreach ($names as $name => $file) {
     $corefile = 'misc/ui/jquery.' . $file . '.min.js';
     $javascript[$name]['js'][$corefile]['data'] = $jspath . 'jquery.' . $file . $min . '.js';
-    $javascript[$name]['version'] = '1.8.9';
+    $javascript[$name]['version'] = '1.8.11';
   }
 
   // Replace all CSS files.
@@ -97,7 +97,8 @@ function jquery_update_library_alter(&$javascript) {
 
   // Replace the jQuery Cookie plugin.
   $javascript['cookie']['js']['misc/jquery.cookie.js']['data'] = $path . '/replace/ui/external/jquery.cookie.js';
-  $javascript['cookie']['version'] = '1.0';
+  // Noting the version based on git commit as no version number is available.
+  $javascript['cookie']['version'] = '67fb34f6a866c40d0570';
 
   // Replace jQuery Form plugin.
   $javascript['jquery.form']['js']['misc/jquery.form.js']['data'] = $path . '/replace/misc/jquery.form.js';
