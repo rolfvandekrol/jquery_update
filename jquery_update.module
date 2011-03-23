@@ -278,5 +278,3 @@ function jquery_update_jqueryui_local(&$javascript, $path, $min, $names) {
     $javascript[$name]['version'] = '1.8.11';
   }
 }
-
-drupal_add_library('system', 'ui.accordion');
