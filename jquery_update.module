@@ -50,7 +50,13 @@ function jquery_update_library() {
 /**
  * Implementation of hook_js_alter().
  */
-function jquery_update_library_alter(&$javascript) {
+function jquery_update_library_alter(&$javascript, $module) {
+
+  // We are updating just the system module. For all other cases we return.
+  if ($module != 'system') {
+    return;
+  }
+
   $path = drupal_get_path('module', 'jquery_update');
 
   // Make sure we inject either the minified or uncompressed version as desired.
