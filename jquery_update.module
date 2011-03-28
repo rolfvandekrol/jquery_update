@@ -196,16 +196,16 @@ function jquery_update_jqueryui_replace(&$javascript, $cdn, $path, $min) {
   switch($cdn) {
     case 'google':
       $cdn = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui' . $min . '.js';
-      jquery_update_jqueryui_cdn($cdn, &$javascript, $path, $min, $names);
+      jquery_update_jqueryui_cdn($cdn, $javascript, $path, $min, $names);
       jquery_update_jqueryui_backup($javascript, $path, $min);
       break;
     case 'microsoft':
       $cdn = 'http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.11/jquery-ui' . $min . '.js';
-      jquery_update_jqueryui_cdn($cdn, &$javascript, $path, $min, $names);
+      jquery_update_jqueryui_cdn($cdn, $javascript, $path, $min, $names);
       jquery_update_jqueryui_backup($javascript, $path, $min);
       break;
     case 'none':
-      jquery_update_jqueryui_local(&$javascript, $path, $min, $names);
+      jquery_update_jqueryui_local($javascript, $path, $min, $names);
       break;
   }
 }
