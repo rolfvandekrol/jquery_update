@@ -76,8 +76,8 @@ function jquery_update_library_alter(&$javascript, $module) {
   $javascript['cookie']['version'] = '67fb34f6a866c40d0570';
 
   // Replace jQuery Form plugin.
-  $javascript['jquery.form']['js']['misc/jquery.form.js']['data'] = $path . '/replace/misc/jquery.form.js';
-  $javascript['jquery.form']['version'] = '2.67';
+  $javascript['jquery.form']['js']['misc/jquery.form.js']['data'] = $path . '/replace/misc/jquery.form' . $min . '.js';
+  $javascript['jquery.form']['version'] = '2.69';
 }
 
 /**
