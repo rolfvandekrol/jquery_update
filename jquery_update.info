@@ -1,5 +1,5 @@
 name = jQuery Update
-description = Updates jQuery to jQuery 1.5.1 and jQuery UI 1.8.11.
+description = Update jQuery and jQuery UI to a more recent version.
 package = User interface
 core = 7.x
 files[] = jquery_update.module
