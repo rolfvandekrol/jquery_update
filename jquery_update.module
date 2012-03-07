@@ -6,6 +6,19 @@
  */
 
 /**
+ * Implements hook_help().
+ */
+function jquery_update_help($path, $arg) {
+  switch ($path) {
+      // Help for another path in the block module
+    case 'admin/config/development/jquery_update':
+      return '<p>' . t('Configure how <a href="@jquery">jQuery</a> behaves on the site. Select which jQuery version, the compression level and whether or not to use a CDN.', array(
+        '@jquery' => 'http://jquery.com',
+      )) . '</p>';
+  }
+}
+
+/**
  * Implements hook_library().
  */
 function jquery_update_library() {
@@ -86,10 +99,25 @@ function jquery_update_library_alter(&$javascript, $module) {
 }
 
 /**
- * Implementation of hook_form_FORM_ID_alter().
+ * Implements hook_menu().
  */
-function jquery_update_form_system_performance_settings_alter(&$form, &$form_state) {
-  $form['bandwidth_optimization']['jquery_update_jquery_version'] = array(
+function jquery_update_menu() {
+  $items['admin/config/development/jquery_update'] = array(
+    'title' => 'jQuery update',
+    'description' => 'Configure settings related to the jQuery upgrade, the library path and compression.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('jquery_update_settings_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_form_FORM_ID().
+ */
+function jquery_update_settings_form() {
+  $form['jquery_update_jquery_version'] = array(
     '#type' => 'select',
     '#title' => t('jQuery Version'),
     '#options' => array(
@@ -99,7 +127,7 @@ function jquery_update_form_system_performance_settings_alter(&$form, &$form_sta
     '#default_value' => variable_get('jquery_update_jquery_version', '1.5'),
     '#description' => t('Select which jQuery version branch to use.'),
   );
-  $form['bandwidth_optimization']['jquery_update_compression_type'] = array(
+  $form['jquery_update_compression_type'] = array(
     '#type' => 'radios',
     '#title' => t('jQuery compression level'),
     '#options' => array(
@@ -108,7 +136,7 @@ function jquery_update_form_system_performance_settings_alter(&$form, &$form_sta
     ),
     '#default_value' => variable_get('jquery_update_compression_type', 'min'),
   );
-  $form['bandwidth_optimization']['jquery_update_jquery_cdn'] = array(
+  $form['jquery_update_jquery_cdn'] = array(
     '#type' => 'select',
     '#title' => t('jQuery and jQuery UI CDN'),
     '#options' => array(
@@ -120,6 +148,8 @@ function jquery_update_form_system_performance_settings_alter(&$form, &$form_sta
     '#default_value' => variable_get('jquery_update_jquery_cdn', 'none'),
     '#description' => t('Use jQuery and jQuery UI from a CDN. If the CDN is not available the local version of jQuery and jQuery UI will be used.'),
   );
+
+  return system_settings_form($form);
 }
 
 /**

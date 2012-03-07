@@ -5,4 +5,4 @@ core = 7.x
 files[] = jquery_update.module
 files[] = jquery_update.install
 
-configure = admin/config/development/performance
+configure = admin/config/development/jquery_update
