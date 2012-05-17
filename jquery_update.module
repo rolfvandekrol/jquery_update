@@ -157,7 +157,7 @@ function jquery_update_settings_form() {
       'jquery' => t('jQuery'),
     ),
     '#default_value' => variable_get('jquery_update_jquery_cdn', 'none'),
-    '#description' => t('Use jQuery and jQuery UI from a CDN. If the CDN is not available the local version of jQuery and jQuery UI will be used. <strong>Warning: Google does not host jQuery UI 1.8.20, which is the version that is included in jQuery Update. When you select Google here, jQuery UI 1.8.18 will be used.</strong>'),
+    '#description' => t('Use jQuery and jQuery UI from a CDN. If the CDN is not available the local version of jQuery and jQuery UI will be used. jQuery CDN does not host jQuery UI, so jQuery UI will be served locally, when jQuery CDN is selected. <strong>Warning: Google does not host jQuery UI 1.8.20, which is the version that is included in jQuery Update. When you select Google here, jQuery UI 1.8.18 will be used.</strong>'),
   );
 
   return system_settings_form($form);
@@ -281,12 +281,12 @@ function jquery_update_jqueryui_replace(&$javascript, $cdn, $path, $min) {
       jquery_update_jqueryui_backup($javascript, $path, $min);
       break;
     case 'microsoft':
-
       $cdn = 'http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.20/jquery-ui' . $min . '.js';
       jquery_update_jqueryui_cdn($cdn, $javascript, $path, $min, $names);
       jquery_update_jqueryui_backup($javascript, $path, $min);
       break;
     case 'none':
+    default:
       jquery_update_jqueryui_local($javascript, $path, $min, $names);
       break;
   }
