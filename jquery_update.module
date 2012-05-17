@@ -63,6 +63,17 @@ function jquery_update_library() {
 /**
  * Implementation of hook_library_alter().
  */
+function jquery_update_js_alter(&$javascript) {
+  // Swap out jQuery to use an updated version of the library.
+  $path = drupal_get_path('module', 'jquery_update');
+  if (isset($javascript['modules/field_ui/field_ui.js'])) {
+    $javascript['modules/field_ui/field_ui.js']['data'] = $path . '/replace/modules/field_ui/field_ui.js';
+  }
+}
+
+/**
+ * Implementation of hook_library_alter().
+ */
 function jquery_update_library_alter(&$javascript, $module) {
 
   // We are updating just the system module. For all other cases we return.
