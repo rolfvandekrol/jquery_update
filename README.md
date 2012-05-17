@@ -1,14 +1,6 @@
+# jQuery Update
 
-CONTENTS OF THIS FILE
----------------------
-
- * Introduction
- * Installation
- * Credits
-
-
-INTRODUCTION
-------------
+## Introduction
 
 jQuery Update module upgrades Drupal's stable version of jQuery in order to
 support the most current jQuery version available.
@@ -19,17 +11,13 @@ release offered by the jQuery project. The jQuery community tends to only
 support the most recent version, so this module ensures that your Drupal
 installation can run the most up-to-date jQuery plug-ins.
 
-
-INSTALLATION
-------------
+## Installation
 
 1. Copy the jquery_update directory to your sites/SITENAME/modules directory.
-
 2. Enable the module at Administer >> Site building >> Modules.
 
+## Credits
 
-CREDITS
--------
 * Matt Farina (mfer)
 * Jeff Robbins (jjeff)
 * Angela Byron (webchick)
