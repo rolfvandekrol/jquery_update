@@ -132,8 +132,8 @@ function jquery_update_settings_form() {
     '#type' => 'select',
     '#title' => t('jQuery Version'),
     '#options' => array(
-      '1.5' => '1.5',
-      '1.7' => '1.7',
+      '1.5' => '1.5.1',
+      '1.7' => '1.7.2',
     ),
     '#default_value' => variable_get('jquery_update_jquery_version', '1.5'),
     '#description' => t('Select which jQuery version branch to use.'),
